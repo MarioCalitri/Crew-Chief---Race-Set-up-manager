@@ -1,0 +1,43 @@
+<?php
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+
+    $eventID = filter_input(INPUT_POST, 'event_id', FILTER_VALIDATE_INT);
+    $sessionName = filter_input(INPUT_POST, 'session_name');
+    
+    $hotLF = filter_input(INPUT_POST, 'hot_pressure_lf', FILTER_VALIDATE_FLOAT) ?: null;
+    $hotRF = filter_input(INPUT_POST, 'hot_pressure_rf', FILTER_VALIDATE_FLOAT) ?: null;
+    $hotLR = filter_input(INPUT_POST, 'hot_pressure_lr', FILTER_VALIDATE_FLOAT) ?: null;
+    $hotRR = filter_input(INPUT_POST, 'hot_pressure_rr', FILTER_VALIDATE_FLOAT) ?: null;
+
+    $adjustments = filter_input(INPUT_POST, 'adjustments');
+    $notes = filter_input(INPUT_POST, 'notes');
+
+    if (!$eventID || empty($sessionName)) {
+        $error = "Invalid event or session name. Please try again.";
+        include('error.php');
+        exit();
+    }
+
+    require_once('database.php');
+
+    $query = 'INSERT INTO pit_logs (eventID, sessionName, hotPressureLF, hotPressureRF, hotPressureLR, hotPressureRR, adjustments, notes)
+              VALUES (:eventID, :sessionName, :hotLF, :hotRF, :hotLR, :hotRR, :adjustments, :notes)';
+
+    $statement = $db->prepare($query);
+    $statement->bindValue(':eventID', $eventID, PDO::PARAM_INT);
+    $statement->bindValue(':sessionName', $sessionName);
+    $statement->bindValue(':hotLF', $hotLF, $hotLF === null ? PDO::PARAM_NULL : PDO::PARAM_STR);
+    $statement->bindValue(':hotRF', $hotRF, $hotRF === null ? PDO::PARAM_NULL : PDO::PARAM_STR);
+    $statement->bindValue(':hotLR', $hotLR, $hotLR === null ? PDO::PARAM_NULL : PDO::PARAM_STR);
+    $statement->bindValue(':hotRR', $hotRR, $hotRR === null ? PDO::PARAM_NULL : PDO::PARAM_STR);
+    $statement->bindValue(':adjustments', $adjustments);
+    $statement->bindValue(':notes', $notes);
+
+    $statement->execute();
+    $statement->closeCursor();
+
+    header('Location: pit_logs.php');
+    exit();
+?>

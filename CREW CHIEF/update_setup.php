@@ -1,5 +1,9 @@
 <?php
 
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+
     // get form data
     $setupID = filter_input(INPUT_POST, 'setup_id', FILTER_VALIDATE_INT);
     $eventID = filter_input(INPUT_POST, 'event_id', FILTER_VALIDATE_INT);
@@ -36,15 +40,16 @@
     $query = 'UPDATE setups
             SET eventID = :eventID,
                 tireSizeLF = :sizeLF, tireSizeRF = :sizeRF, tireSizeLR = :sizeLR, tireSizeRR = :sizeRR, 
-                tirePressureLF = :lfPressure, tirePressureRF = :rfPressure, tirePressureLR = :lrPressure, tirePressureRR = rrPressure,
+                tirePressureLF = :lfPressure, tirePressureRF = :rfPressure, tirePressureLR = :lrPressure, tirePressureRR = :rrPressure,
                 frontStagger = :frontStagger, rearStagger = :rearStagger, 
                 weightLF = :weightLF, weightRF = :weightRF, weightLR = :weightLR, weightRR = :weightRR, 
                 leftWeight = :leftWeight, crossWeight = :crossWeight, totalWeight = :totalWeight, notes = :notes
                 WHERE setupID = :setupID';
 
-                $statement = $db->prepare($query);
-        $statement->bindValue(':setupID', $setupID);
-        $statement->bindValue(':eventID', $eventID);
+        $statement = $db->prepare($query);
+
+        $statement->bindValue(':setupID', $setupID, PDO::PARAM_INT);
+        $statement->bindValue(':eventID', $eventID, PDO::PARAM_INT);
         $statement->bindValue(':sizeLF', $sizeLF);
         $statement->bindValue(':sizeRF', $sizeRF);
         $statement->bindValue(':sizeLR', $sizeLR);
@@ -60,14 +65,14 @@
         $statement->bindValue(':weightLR', $weightLR);
         $statement->bindValue(':weightRR', $weightRR);
         $statement->bindValue(':leftWeight', $leftWeight);
-        $statement->bindValue(':crossWeight', $crossWeight);
-        $statement->bindValue(':totalWeight', $totalWeight);
+        $statement->bindValue(':crossWeight', $crossWeight, PDO::PARAM_INT);
+        $statement->bindValue(':totalWeight', $totalWeight, PDO::PARAM_INT);
         $statement->bindValue(':notes', $notes);
 
         $statement->execute();
         $statement->closeCursor();
 
-        header('Location: index.php');
+        header('Location: setups.php');
     }
 
 ?>

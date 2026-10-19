@@ -4,103 +4,105 @@
     error_reporting(E_ALL);
     require("database.php");
 
-    $querySetups = 'SELECT s.setupID, s.eventID, e.eventName, e.trackName, e.eventDate,
-        s.tireSizeLF, s.tireSizeRF, s.tireSizeLR, s.tireSizeRR,
-        s.tirePressureLF, s.tirePressureRF, s.tirePressureLR, s.tirePressureRR,
-        s.frontStagger, s.rearStagger, s.crossWeight, s.totalWeight
-        FROM setups s
-        LEFT JOIN race_events e ON s.eventID = e.eventID
-        ORDER BY e.eventDate DESC';
+    session_start();
+    /*if (!isset($_SESSION['isLoggedIn']) || $_SESSION['isLoggedIn'] !== TRUE) {
+        header("Location: login_form.php");
+        exit();
+    }*/
 
-    $statement = $db->prepare($querySetups);
+    // Fetch quick stats or recent events for the home dashboard
+    $queryRecentEvents = 'SELECT * FROM race_events ORDER BY eventDate DESC LIMIT 3';
+    $statement = $db->prepare($queryRecentEvents);
     $statement->execute();
-    $setups = $statement->fetchAll();
+    $recentEvents = $statement->fetchAll();
     $statement->closeCursor();
-
 ?>
 
 <!DOCTYPE html>
-
 <html>
+<head>
+    <title>Crew Chief - Home</title>
+    <link rel="stylesheet" type="text/css" href="css/crew_chief.css" />
+</head>
+<body>
 
-    <head>
-        <title>Crew Chief - Setup Sheets</title>
-        <link rel="stylesheet" type="text/css" href="css/crew_chief.css" />
-    </head>
+    <?php include('header.php'); ?>
 
-    <body>
+    <main>
+    <div class="welcomeSection">
+        <h1>Welcome to Crew Chief</h1>
+        <p>Grassroots short-track oval racing setup management & pit logging.</p>
+    </div>
 
-        <?php include('header.php'); ?>
+    <div class="dashboardCardsLarge">
 
-        <h1>ChassisSetup Sheets</h1>
+        <!-- Section 2: Race Events -->
+        <div class="featureCard">
+            <div class="featureIcon">
+                <!-- Calendar / Flag Clipart Icon -->
+                <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 12H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm-8 4H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/></svg>
+            </div>
+            <div class="featureContent">
+                <h2>Race Events</h2>
+                <p>Manage tracks, event dates, and schedule details.</p>
+                <div id="buttons">
+                <label>&nbsp;</label>
+                    <form action="race_events.php" method="get" style="display: inline;">
+                        <input type="submit" value="VIEW RACE EVENTS" />
+                    </form>
+            </div>
+            </div>
+        </div>
 
-        <table>
+                <!-- Section 1: Setups -->
+        <div class="featureCard">
+            <div class="featureIcon">
+                <!-- Car / Wrench Clipart Icon -->
+                <svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.5 7.1 1 10.1 3 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg>
+            </div>
+            <div class="featureContent">
+                <h2>Chassis Setups</h2>
+                <p>Log tire sizes, pressures, stagger, and corner weights for upcoming race events.</p>
+                <div id="buttons">
+                <label>&nbsp;</label>
+                    <form action="setups.php" method="get" style="display: inline;">
+                        <input type="submit" value="VIEW SETUP SHEETS" />
+                    </form>
+                </div>
+            </div>
+        </div>
 
-                <tr>
-                    <th>Event Name</th>
-                    <th>Track Name</th>
-                    <th>Event Date</th>
-                    <th>Tire Sizes (LF/RF/LR/RR)</th>
-                    <th>Pressures (LF/RF/LR/RR)</th>
-                    <th>Front Stagger</th>
-                    <th>Rear Stagger</th>
-                    <th>Cross Wt (%)</th>
-                    <th>Total Wt (lbs)</th>
-                    <th>&nbsp;</th> <!-- for update -->
-                    <th>&nbsp;</th> <!-- for delete -->
-                    <th>&nbsp;</th> <!-- for view details -->
-                </tr>
 
-                <?php foreach ($setups as $setup) : ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($setup['eventName']); ?></td>
-                        <td><?php echo htmlspecialchars($setup['trackName']); ?></td>
-                        <td><?php echo htmlspecialchars($setup['eventDate']); ?></td>
-                        <td>
-                            <?php echo htmlspecialchars($setup['tireSizeLF'] ?? '-'); ?> / 
-                            <?php echo htmlspecialchars($setup['tireSizeRF'] ?? '-'); ?> / 
-                            <?php echo htmlspecialchars($setup['tireSizeLR'] ?? '-'); ?> / 
-                            <?php echo htmlspecialchars($setup['tireSizeRR'] ?? '-'); ?>
-                        </td>
-                        <td>
-                            <?php echo htmlspecialchars($setup['tirePressureLF']); ?>
-                            <?php echo htmlspecialchars($setup['tirePressureRF']); ?>
-                            <?php echo htmlspecialchars($setup['tirePressureLR']); ?>
-                            <?php echo htmlspecialchars($setup['tirePressureRR']); ?>
-                        </td>
-                        <td><?php echo htmlspecialchars($setup['frontStagger']); ?></td>
-                        <td><?php echo htmlspecialchars($setup['rearStagger']); ?></td>
-                        <td><?php echo htmlspecialchars($setup['crossWeight']); ?></td>
-                        <td><?php echo htmlspecialchars($setup['totalWeight']); ?></td>
+        <!-- Section 3: Checklists & Pit Logs -->
+        <div class="featureCard">
+            <div class="featureIcon">
+                <!-- Clipboard Clipart Icon -->
+                <svg viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm7 16H5V5h2v2h10V5h2v14z"/></svg>
+            </div>
+            <div class="featureContent">
+                <h2>Checklists & Pit Logs</h2>
+                <p>Track pre-race preparation and record session adjustments.</p>
+                <div id="buttons">
+                <label>&nbsp;</label>
+                    <form action="pit_logs.php" method="get" style="display: inline;">
+                        <input type="submit" value="VIEW LISTS & PIT LOGS" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                        <td>
-                            <form action="update_setup.php" method="post">
-                                <input type="hidden" name="setup_id" value="<?php echo $setup['setupID']; ?>">
-                                <input type="submit" value="Update">
-                            </form>
-                        </td>
+    <!-- Recent Events -->
+    <div class="recentEventsSection">
+        <h3>Upcoming & Recent Events</h3>
+        <ul class="recentEventsList">
+            <li><strong>Gold Rush 126</strong> at Flamboro Speedway (2026-06-30)</li>
+            <li><strong>Don Biederman Memorial</strong> at Deleware Speedway (2026-06-22)</li>
+        </ul>
+    </div>
+</main>
 
-                        <td>
-                            <form action="delete_setup.php" method="post">
-                                <input type="hidden" name="setup_id" value="<?php echo $setup['setupID']; ?>">
-                                <input type="submit" value="Delete">
-                            </form>
-                        </td>
+    <?php include('footer.php'); ?>
 
-                        <td>
-                            <form action="setup_details.php" method="post">
-                                <input type="hidden" name="setup_id" value="<?php echo $setup['setupID']; ?>">
-                                <input type="submit" value="View Details">
-                            </form>
-                        </td>
-
-                    </tr>
-                <?php endforeach; ?>
-
-            </table>
-            <p><a href="add_setup_form.php">Add New Setup</a></p>
-                </main>
-
-                <?php include("footer.php"); ?>
 </body>
 </html>

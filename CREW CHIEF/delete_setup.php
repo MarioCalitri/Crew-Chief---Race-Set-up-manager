@@ -14,6 +14,6 @@
     }
         
     // redirect to setup list
-    header('Location: index.php');
+    header('Location: setups.php');
     
 ?>

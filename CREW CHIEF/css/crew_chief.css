@@ -1,3 +1,35 @@
+/* Declare Custom Race Pod Font */
+@font-face {
+    font-family: 'RacePod';
+    src: url('../fonts/racepod.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Special Speed Agent';
+    src: url('../fonts/SpecialSpeedAgent.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Greats Racing';
+    src: url('../fonts/GreatsRacing.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'RacePods';
+    src: url('../fonts/racepodexpand.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'EdgeRacer';
+    src: url('../fonts/edgeracerexpandital.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 /* Reset and standard box sizing */
 * {
     box-sizing: border-box;
@@ -13,60 +45,129 @@ body {
     padding: 20px;
 }
 
-/* Header styling */
-header {
-    background-color: #0d0d0d;
-    border-bottom: 3px solid #d32f2f; /* Racing Red accent */
-    padding: 20px;
-    margin-bottom: 25px;
+/* Header Styling (camelCase) */
+.siteHeader {
+    background: #0f0f0f;
+    border-bottom: 2px solid #e50914;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+    padding: 15px 0;
+    width: 100%;
+    margin-bottom: 30px;
     border-radius: 6px;
 }
 
-header h1 {
-    color: #ffffff;
-    font-size: 2rem;
+.headerContainer {
+    max-width: auto;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-transform: uppercase;
+}
+
+.headerTitle {
+    color: #ff0000;
+    font-family: 'EdgeRacer', sans-serif;
+    font-size: 4rem;
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-bottom: 10px;
+    font-weight: bold;
+    padding-left: 100px;
+}
+.headerBrand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.headerLogoLink {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.headerLogo {
+    height: 55px;
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.2s ease;
+}
+
+.headerLogo:hover {
+    transform: scale(1.02);
 }
 
 /* Global Navigation Menu */
-header nav ul {
-    list-style: none;
+.mainNav {
     display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: nowrap;
 }
 
-header nav a {
-    color: #bbb;
+.mainNav a {
+    color: #ccc;
     text-decoration: none;
-    font-weight: 600;
-    padding: 6px 12px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 8px 14px;
     border-radius: 4px;
-    transition: background 0.2s, color 0.2s;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    transition: color 0.2s ease, background-color 0.2s ease;
 }
 
-header nav a:hover {
-    background-color: #d32f2f;
+.mainNav a:hover {
     color: #ffffff;
+    background-color: #1f1f1f;
+    text-decoration: none !important;
+}
+
+/* Styled Login Button in Nav */
+.mainNav a.navLoginBtn {
+    background-color: #e50914;
+    color: #ffffff;
+    padding: 8px 18px;
+    border-radius: 4px;
+    margin-left: 10px;
+    font-weight: 700;
+}
+
+.mainNav span.navSeparator {
+    color: #444;
+    font-weight: 300;
+    user-select: none;
+}
+
+.mainNav a.navLoginBtn:hover {
+    background-color: #ff1e1e;
 }
 
 /* Main Content Area */
 main {
-    max-width: 1200px;
-    margin: 0 auto;
-    background-color: #242424;
-    padding: 25px;
+    max-width: 1000px;
+    margin: 40px auto;
+    background: #161616;
+    padding: 40px;
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    border: 1px solid #2a2a2a;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
 }
 
-h2 {
+main h1 {
     color: #ffffff;
-    border-bottom: 2px solid #333;
-    padding-bottom: 8px;
-    margin-bottom: 20px;
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #e50914;
+    padding-bottom: 10px;
+}
+
+main h2 {
+    color: #f1f1f1;
+    font-size: 1.3rem;
+    margin-top: 30px;
+    margin-bottom: 15px;
 }
 
 h3 {
@@ -84,37 +185,39 @@ a {
     text-decoration: none;
 }
 
-a:hover {
-    text-decoration: underline;
-}
 
 /* Data Tables */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px;
+    margin-top: 15px;
     background-color: #1e1e1e;
     border-radius: 6px;
     overflow: hidden;
+    border: 1px solid #333;
 }
 
 th, td {
-    padding: 12px 15px;
+    padding: 14px 16px;
     text-align: left;
     border-bottom: 1px solid #333;
 }
 
 th {
     background-color: #0d0d0d;
-    color: #ff9800;
-    font-weight: bold;
+    color: #ff3b3b;
+    font-weight: 700;
     text-transform: uppercase;
     font-size: 0.85rem;
     letter-spacing: 0.5px;
 }
 
 tr:hover {
-    background-color: #2a2a2a;
+    background-color: #252525;
+}
+
+td {
+    color: #ddd;
 }
 
 /* Form Styles */
@@ -167,7 +270,7 @@ button {
     background-color: #d32f2f;
     color: white;
     border: none;
-    padding: 9px 18px;
+    padding: 10px 18px;
     font-weight: bold;
     border-radius: 4px;
     cursor: pointer;
@@ -180,7 +283,7 @@ button:hover {
 }
 
 /* Checklist Cards & Details Sections */
-.details-section {
+.detailsSection {
     background-color: #1a1a1a;
     border-left: 4px solid #d32f2f;
     padding: 15px 20px;
@@ -196,6 +299,250 @@ input[type="checkbox"] {
     accent-color: #d32f2f;
 }
 
+#buttons {
+    text-align: left !important;
+    display: flex !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    gap: 15px !important;
+}
+
+#buttons label {
+    display: none !important;
+}
+
+/* Welcome Section */
+.welcomeSection {
+    margin-bottom: 35px;
+}
+
+.welcomeSection h1 {
+    color: #ffffff;
+    font-size: 2rem;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #e50914;
+    padding-bottom: 15px;
+}
+
+.welcomeSection p {
+    color: #aaa;
+    font-size: 1.05rem;
+}
+
+/* Large Feature Cards */
+.dashboardCardsLarge {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.featureCard {
+    display: flex;
+    align-items: center;
+    background: #1f1f1f;
+    border: 1px solid #333;
+    border-left: 5px solid #e50914;
+    padding: 30px;
+    border-radius: 6px;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.featureCard:hover {
+    transform: translateY(-2px);
+    border-color: #555;
+    border-left-color: #ff1e1e;
+}
+
+/* Clipart / SVG Icon Container */
+.featureIcon {
+    flex-shrink: 0;
+    width: 65px;
+    height: 65px;
+    background: #121212;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 25px;
+    border: 1px solid #333;
+}
+
+.featureIcon svg {
+    width: 32px;
+    height: 32px;
+    fill: #e50914;
+}
+
+/* Content inside large cards */
+.featureContent {
+    flex-grow: 1;
+}
+
+.featureContent h2 {
+    color: #fff;
+    font-size: 1.35rem;
+    margin-bottom: 8px;
+}
+
+.featureContent p {
+    color: #aaa;
+    font-size: 0.95rem;
+    margin: 0 0 15px 0;
+    line-height: 1.4;
+}
+
+/* Action Button */
+.btnFeature {
+    display: inline-block;
+    background-color: #e50914;
+    color: #fff;
+    padding: 8px 18px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease;
+}
+
+.btnFeature:hover {
+    background-color: #ff1e1e;
+}
+
+/* Recent Events Section */
+.recentEventsSection {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid #333;
+}
+
+.recentEventsSection h3 {
+    color: #fff;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.recentEventsList {
+    background: #121212;
+    border: 1px solid #262626;
+    padding: 20px 25px;
+    border-radius: 6px;
+    list-style: none;
+}
+
+.recentEventsList li {
+    padding: 10px 0;
+    border-bottom: 1px solid #1a1a1a;
+    color: #bbb;
+}
+
+.recentEventsList li:last-child {
+    border-bottom: none;
+}
+
+.recentEventsList strong {
+    color: #fff;
+}
+
+/* Modern Form Styling */
+.eventFormSection form {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 15px 20px;
+    align-items: center;
+    background: #1f1f1f;
+    padding: 25px;
+    border-radius: 6px;
+    border: 1px solid #333;
+}
+
+.eventFormSection label {
+    color: #ccc;
+    font-weight: 600;
+    text-align: right;
+}
+
+.eventFormSection input[type="text"],
+.eventFormSection input[type="date"] {
+    width: 100%;
+    padding: 10px 14px;
+    background: #121212;
+    border: 1px solid #444;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 1rem;
+}
+
+.eventFormSection input[type="text"]:focus,
+.eventFormSection input[type="date"]:focus {
+    border-color: #e50914;
+    outline: none;
+}
+
+.eventFormSection input[type="submit"] {
+    grid-column: 2;
+    background-color: #e50914;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    justify-self: start;
+    transition: background 0.2s;
+}
+
+.eventFormSection input[type="submit"]:hover {
+    background-color: #ff1e1e;
+}
+
+/* Table Action Buttons */
+td form {
+    display: inline-block;
+    margin: 0 4px;
+}
+
+td input[type="submit"] {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 0.85rem;
+}
+
+/* Edit Button style */
+td form:first-of-type input[type="submit"] {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #555;
+}
+td form:first-of-type input[type="submit"]:hover {
+    background-color: #444;
+}
+
+/* Delete Button style */
+td form:last-of-type input[type="submit"] {
+    background-color: #b30000;
+    color: white;
+    padding: 6px 10px;
+}
+td form:last-of-type input[type="submit"]:hover {
+    background-color: #e50914;
+}
+
+/* Return Link */
+main > p > a {
+    display: inline-block;
+    margin-top: 25px;
+    color: #e50914;
+    text-decoration: none;
+    font-weight: bold;
+}
+main > p > a:hover {
+    text-decoration: underline;
+}
+
 /* Footer */
 footer {
     text-align: center;
@@ -204,4 +551,230 @@ footer {
     border-top: 1px solid #333;
     color: #777;
     font-size: 0.85rem;
+}
+/* Pit Logs List Spacing */
+.pitLogListSection {
+    max-width: 1100px !important; /* Expands container width */
+    margin: 40px auto;
+}
+
+.pitLogTable {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 20px;
+    background: #1f1f1f;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid #333;
+}
+
+.pitLogTable th {
+    background-color: #121212;
+    color: #ff3b3b;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 16px 14px;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #2a2a2a;
+}
+
+.pitLogTable td {
+    padding: 18px 14px; /* Increases vertical and horizontal spacing */
+    vertical-align: middle;
+    border-bottom: 1px solid #282828;
+    color: #e0e0e0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.pitLogTable tr:hover td {
+    background-color: #252525;
+}
+
+/* Action Button Styles */
+.btnTableEdit {
+    display: inline-block;
+    background-color: #e50914;
+    color: #ffffff !important;
+    padding: 7px 14px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.btnTableEdit:hover {
+    background-color: #ff1e1e;
+    text-decoration: none !important;
+}
+
+.btnTableDelete {
+    background-color: #fc0000 !important;
+    color: #ffffff !important;
+    padding: 7px 14px !important;
+    border-radius: 4px !important;
+    font-weight: bold !important;
+    font-size: 0.85rem !important;
+    border: 1px solid #444 !important;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.btnTableDelete:hover {
+    background-color: #b30000 !important;
+    border-color: #e50914 !important;
+}
+
+/* Center Alignment Utility */
+.textCenter {
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+/* Ensure forms inside centered table cells don't offset alignment */
+.pitLogTable td.textCenter {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.actionForm {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Button dimensions for identical button widths */
+.btnTableEdit,
+.btnTableDelete {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 75px;
+    height: 32px;
+    padding: 0 12px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border-radius: 4px;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+.btnTableEdit {
+    background-color: #e50914;
+    color: #ffffff !important;
+    border: none;
+    transition: background 0.2s ease;
+}
+
+.btnTableEdit:hover {
+    background-color: #ff1e1e;
+}
+
+.btnTableDelete {
+    background-color: #e50914;
+    color: #ffffff !important;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.btnTableDelete:hover {
+    background-color: #ff1e1e;
+}
+/* Pit Logs Container */
+.pitLogListSection {
+    max-width: 1100px;
+    margin: 30px auto;
+}
+
+/* Single Unified Table */
+.pitLogTable {
+    width: 100%;
+    border-collapse: collapse; /* Merges borders so headers & body stay locked together */
+    margin-top: 20px;
+    background: #1a1a1a;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid #333333;
+}
+
+.pitLogTable th {
+    background-color: #0f0f0f;
+    color: #ff3b3b;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 14px 16px;
+    text-align: left;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #333333;
+}
+
+.pitLogTable td {
+    padding: 16px;
+    vertical-align: middle;
+    border-bottom: 1px solid #282828;
+    color: #e0e0e0;
+    font-size: 0.95rem;
+}
+
+.pitLogTable tr:last-child td {
+    border-bottom: none;
+}
+
+.pitLogTable tr:hover td {
+    background-color: #222222;
+}
+
+/* Action Cell & Button Alignments */
+.pitLogTable td.actionCell {
+    text-align: center;
+}
+
+.btnTableEdit,
+.btnTableDelete {
+    display: inline-block;
+    background-color: #e50914;
+    color: #ffffff !important;
+    padding: 8px 14px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border: none;
+    text-decoration: none !important;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.btnTableEdit:hover,
+.btnTableDelete:hover {
+    background-color: #ff1e1e;
+}
+/* Force Left Alignment and Zero Out Offset Padding */
+.pitLogTable th.alignLeft,
+.pitLogTable td.alignLeft {
+    text-align: left !important;
+    padding-left: 16px !important;
+}
+
+/* Header Subtext Alignment */
+.pitLogTable th small.subText {
+    display: block;
+    color: #ff3b3b;
+    font-size: 0.78rem;
+    font-weight: 700;
+    margin-top: 2px;
+}
+
+/* Pressure Text Alignment & Styling */
+.pressureValues {
+    font-family: 'Segoe UI', Tahoma, monospace;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: #ffffff;
+    white-space: nowrap; /* Keeps all four tire readings on one line */
 }

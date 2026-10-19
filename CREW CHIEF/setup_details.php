@@ -86,21 +86,26 @@
             <p><strong>Rear Stagger:</strong> <?php echo htmlspecialchars($setup['rearStagger'] ?? '-'); ?>"</p>
         </section>
 
-        <section class="details-section">
-            <h3>Wheel Weights & Percentages</h3>
-            <p><strong>Corner Weights:</strong></p>
-            <ul>
-                <li><strong>LF:</strong> <?php echo htmlspecialchars($setup['weightLF'] ?? '-'); ?> lbs</li>
-                <li><strong>RF:</strong> <?php echo htmlspecialchars($setup['weightRF'] ?? '-'); ?> lbs</li>
-                <li><strong>LR:</strong> <?php echo htmlspecialchars($setup['weightLR'] ?? '-'); ?> lbs</li>
-                <li><strong>RR:</strong> <?php echo htmlspecialchars($setup['weightRR'] ?? '-'); ?> lbs</li>
-            </ul>
+<section class="details-section">
+    <h3>Wheel Weights & Percentages</h3>
+    <p><strong>Corner Weights:</strong></p>
+    <ul>
+        <li><strong>LF:</strong> <?php echo htmlspecialchars($setup['weightLF'] ?? '-'); ?> lbs</li>
+        <li><strong>RF:</strong> <?php echo htmlspecialchars($setup['weightRF'] ?? '-'); ?> lbs</li>
+        <li><strong>LR:</strong> <?php echo htmlspecialchars($setup['weightLR'] ?? '-'); ?> lbs</li>
+        <li><strong>RR:</strong> <?php echo htmlspecialchars($setup['weightRR'] ?? '-'); ?> lbs</li>
+    </ul>
 
-            <p><strong>Left Weight:</strong> <?php echo htmlspecialchars($setup['leftWeight'] ?? '-'); ?>%</p>
-            <p><strong>Cross Weight:</strong> <?php echo htmlspecialchars($setup['crossWeight'] ?? '-'); ?>%</p>
-            <p><strong>Total Weight:</strong> <?php echo htmlspecialchars($setup['totalWeight'] ?? '-'); ?> lbs</p>
-        </section>
+    <p><strong>Left Weight:</strong> <?php echo htmlspecialchars($setup['leftWeight'] ?? '-'); ?>%</p>
+    <p><strong>Cross Weight:</strong> <?php echo htmlspecialchars($setup['crossWeight'] ?? '-'); ?>%</p>
 
+    <?php 
+        // Calculate dynamic total fallback if totalWeight is NULL or empty
+        $calcTotal = ($setup['weightLF'] ?? 0) + ($setup['weightRF'] ?? 0) + ($setup['weightLR'] ?? 0) + ($setup['weightRR'] ?? 0);
+        $displayTotal = !empty($setup['totalWeight']) ? $setup['totalWeight'] : ($calcTotal > 0 ? $calcTotal : '-');
+    ?>
+    <p><strong>Total Weight:</strong> <?php echo htmlspecialchars($displayTotal); ?> lbs</p>
+</section>
         <section class="details-section">
             <h3>Gearing & Notes</h3>
             <p><strong>Gear Ratio:</strong> <?php echo htmlspecialchars($setup['gearRatio'] ?? 'N/A'); ?></p>
@@ -112,8 +117,12 @@
             <form action="update_setup_form.php" method="post" style="display:inline;">
                 <input type="hidden" name="setup_id" value="<?php echo $setup['setupID']; ?>" />
                 <input type="submit" value="Edit Setup" />
+            </form> 
+            <form action="index.php" method="post" style="display:inline;">
+                <input type="hidden" name="setup_id" value="<?php echo $setup['setupID']; ?>" />
+                <input type="submit" value="Back to Setup List" />
             </form>
-            | <a href="index.php">Back to Setup List</a>
+            
         </p>
 
     </main>
