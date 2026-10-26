@@ -118,7 +118,7 @@
                 <input type="hidden" name="setup_id" value="<?php echo $setup['setupID']; ?>" />
                 <input type="submit" value="Edit Setup" />
             </form> 
-            <form action="index.php" method="post" style="display:inline;">
+            <form action="setups.php" method="post" style="display:inline;">
                 <input type="hidden" name="setup_id" value="<?php echo $setup['setupID']; ?>" />
                 <input type="submit" value="Back to Setup List" />
             </form>

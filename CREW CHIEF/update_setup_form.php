@@ -118,7 +118,9 @@ $statementEvents->closeCursor();
 
         </form>
 
-        <p><a href="index.php">View Setup List</a></p>
+        <form action="setups.php" method="get" style="display: inline;">
+                        <input type="submit" value="View Setup List" />
+                    </form>
 
     </main>
 

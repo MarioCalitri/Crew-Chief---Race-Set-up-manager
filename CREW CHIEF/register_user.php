@@ -52,13 +52,16 @@
     $statement->execute();    
     $statement->closeCursor();
 
+    // Get the ID of the newly inserted user
+    $newUserID = $db->lastInsertId();
+
     $_SESSION["username"] = $user_name;
-    $_SESSION["isLoggedIn"] = 1;
+    $_SESSION["isLoggedIn"] = true;
+    $_SESSION["user_id"] = $newUserID; // <-- Add this so new users are instantly logged in with an ID
 
     $url = "register_user_confirmation.php";
     header("Location: " . $url);
     die();
-
 ?>
 
     

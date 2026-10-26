@@ -97,7 +97,7 @@
 
         <div id="buttons">
                     <label>&nbsp;</label>
-                    <form action="index.php" method="get" style="display: inline;">
+                    <form action="setups.php" method="get" style="display: inline;">
                         <input type="submit" value="VIEW SETUP LIST" />
                 </form>
             </div>

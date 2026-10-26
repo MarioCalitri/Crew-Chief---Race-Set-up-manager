@@ -9,15 +9,17 @@
         $eventName = filter_input(INPUT_POST, 'event_name');
         $trackName = filter_input(INPUT_POST, 'track_name');
         $eventDate = filter_input(INPUT_POST, 'event_date');
+        $notes = filter_input(INPUT_POST, 'notes');
 
         if ($eventID && $eventName && $trackName && $eventDate) {
             $queryUpdate = 'UPDATE race_events 
-                            SET eventName = :eventName, trackName = :trackName, eventDate = :eventDate 
+                            SET eventName = :eventName, trackName = :trackName, eventDate = :eventDate, notes = :notes 
                             WHERE eventID = :eventID';
             $stmt = $db->prepare($queryUpdate);
             $stmt->bindValue(':eventName', $eventName);
             $stmt->bindValue(':trackName', $trackName);
             $stmt->bindValue(':eventDate', $eventDate);
+            $stmt->bindValue(':notes', $notes);
             $stmt->bindValue(':eventID', $eventID);
             $stmt->execute();
             $stmt->closeCursor();
@@ -72,6 +74,9 @@
             <label>Event Date:</label>
             <input type="date" name="event_date" value="<?php echo htmlspecialchars($event['eventDate']); ?>" required /><br />
 
+            <h3>Notes</h3>
+            <textarea name="notes" rows="4" cols="50"><?php echo htmlspecialchars($event['notes'] ?? ''); ?></textarea><br />
+
             <label>&nbsp;</label>
             <input type="submit" value="Update Event" /><br />
         </form>
@@ -79,7 +84,7 @@
         <div id="buttons">
                 <label>&nbsp;</label>
                 <form action="race_events.php" method="get" style="display: inline;">
-                    <input type="submit" value="Cancel  ➡  Back to Race Events" />
+                    <input type="submit" value="Back to Race Events" />
                 </form>
             </div>
 

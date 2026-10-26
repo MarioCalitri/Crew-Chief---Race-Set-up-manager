@@ -23,8 +23,10 @@
                 Thank you, <?php echo htmlspecialchars($_SESSION['username']); ?>
                 for registering!
             </p>
-
-            <p><a href="index.php" class="btn-add">View Profile List</a></p>
+ <form action="profiles.php" method="get" style="display: inline;">
+            <input type="submit" value="View Profile" />
+        </form>            
+        <p><a href="index.php" class="btn-add">View Profile List</a></p>
 
         </main> 
 

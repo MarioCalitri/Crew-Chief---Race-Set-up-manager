@@ -18,13 +18,12 @@
         <main>
             <h2>Login</h2>
 
-            <?php
-
-                if (isset($_SESSION['login_error'])) {
-                    $error_msg = $_SESSION['login_error'];
+                <?php
+                if (isset($_SESSION['user_error'])) {
+                    $error_msg = $_SESSION['user_error'];
                     echo '<p id="lockout-error" style="color: red; font-weight: bold;">' . htmlspecialchars($error_msg) . '</p>';
                     
-                    // extract numbers 
+                    // extract numbers if a lockout timer string is passed
                     preg_match('/\d+/', $error_msg, $matches);
                     $lockout_seconds = isset($matches[0]) ? intval($matches[0]) : 0;
                     
@@ -47,7 +46,7 @@
                         </script>';
                     }
                     
-                    unset($_SESSION['login_error']);
+                    unset($_SESSION['user_error']);
                 }
             ?>
 

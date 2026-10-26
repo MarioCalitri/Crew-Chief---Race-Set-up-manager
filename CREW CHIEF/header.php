@@ -10,8 +10,9 @@
             <a href="index.php">Home</a> |
             <a href="race_events.php">Race Events</a> |
             <a href="setups.php">Setups</a> |
-            <a href="checklists.php">Checklists</a> |
             <a href="pit_logs.php">Pit Logs</a> |
+            <a href="checklists.php">Checklists</a> |
+            <a href="notes.php">Notes</a> |
             <a href="login.php">Login</a> 
         </nav>
     </div>

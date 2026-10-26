@@ -14,31 +14,28 @@
         <main>
             <h2>Register User</h2>
 
-            <form action="register_user.php" method="post">
-                
-                <div id="data">
-                        
-                    <label>Username:</label>
-                    <input type="text" name="username" required>
-                    
-                    <label>Password:</label>
-                    <input type="password" name="password" required>
-                    
-                    <label>Email Address:</label>
-                    <input type="text" name="emailAddress" required>
-                
+            <form action="register_user.php" method="post" class="registration-form">
+                <div class="formRow">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
                 </div>
 
-                <div id="buttons">
-
-                    <label>&nbsp;</label>
-                    <input type="submit" value="Register" />
-
+                <div class="formRow">
+                    <label for="email">Email Address:</label>
+                    <input type="email" id="email" name="emailAddress" required>
                 </div>
 
+                <div class="formRow">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+
+                <div class="formActions">
+                    <input type="submit" value="Register" class="btn-submit">
+                    <a href="login.php" class="buttonLink">Back to Login</a>
+                </div>
             </form>
-
-            <p><a href="index.php" class="btn-add">Back To Login</a></p>
+            
 
         </main>
 

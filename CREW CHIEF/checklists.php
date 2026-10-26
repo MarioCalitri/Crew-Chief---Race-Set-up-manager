@@ -38,7 +38,9 @@
     <main>
         <h2>Pre-Race Checklists & Pit Lane Tasks</h2>
 
-        <p><a href="add_checklist_form.php">Create New Checklist</a> | <a href="index.php">Back to Setup Sheets</a></p>
+        <div class="buttonContainer">
+            <a href="add_checklist_form.php" class="buttonLink">Create New Checklist</a>
+        </div>
 
         <?php if (empty($lists)): ?>
             <p>No checklists created yet.</p>
@@ -78,9 +80,14 @@
                         <input type="hidden" name="list_id" value="<?php echo $list['listID']; ?>" />
                         <input type="text" name="item_name" placeholder="New task/item name" required />
                         <input type="number" name="quantity" value="1" min="1" style="width: 60px;" required />
-                        <input type="submit" value="Add Item" />
+                        <input type="submit" value="Add To List" />
                     </form>
+                
                 </section>
+
+                <div class="buttonContainer">
+            <a href="index.php" class="buttonLink">Back to Setup Sheets</a>
+        </div>
             <?php endforeach; ?>
         <?php endif; ?>
 

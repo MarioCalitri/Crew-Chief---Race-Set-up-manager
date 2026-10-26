@@ -2,13 +2,15 @@
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
-    require("database.php");
 
     session_start();
-    /*if (!isset($_SESSION['isLoggedIn']) || $_SESSION['isLoggedIn'] !== TRUE) {
+
+    if (!isset($_SESSION['isLoggedIn']) || $_SESSION['isLoggedIn'] !== TRUE) {
         header("Location: login_form.php");
         exit();
-    }*/
+    }
+
+    require("database.php");
 
     // Fetch quick stats or recent events for the home dashboard
     $queryRecentEvents = 'SELECT * FROM race_events ORDER BY eventDate DESC LIMIT 3';
@@ -16,7 +18,27 @@
     $statement->execute();
     $recentEvents = $statement->fetchAll();
     $statement->closeCursor();
+
+    // check user ID in the session
+    $user_id = $_SESSION['user_id'] ?? 0;
+
+// get all setups (since setups table doesn't have a user_id column)
+    $querySetups = 'SELECT * FROM setups';
+    $statementSetups = $db->prepare($querySetups);
+    $statementSetups->execute();
+    $setups = $statementSetups->fetchAll();
+    $statementSetups->closeCursor();
+
+    // fetch all profiles
+    $queryProfiles = 'SELECT * FROM profiles';
+    $statementProfiles = $db->prepare($queryProfiles);
+    $statementProfiles->execute();
+    $profiles = $statementProfiles->fetchAll();
+    $statementProfiles->closeCursor();
+
 ?>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -34,7 +56,13 @@
         <p>Grassroots short-track oval racing setup management & pit logging.</p>
     </div>
 
-    <div class="dashboardCardsLarge">
+        <p>Current Logged In User: <?php echo htmlspecialchars($_SESSION["user_name"] ?? $_SESSION["username"] ?? 'Guest'); ?></p>
+
+        <form action="logout.php" method="get" style="display: inline;">
+            <input type="submit" value="Logout" />
+        </form>
+
+        <div class="dashboardCardsLarge">
 
         <!-- Section 2: Race Events -->
         <div class="featureCard">

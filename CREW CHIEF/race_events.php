@@ -10,14 +10,16 @@
         $eventName = filter_input(INPUT_POST, 'event_name');
         $trackName = filter_input(INPUT_POST, 'track_name');
         $eventDate = filter_input(INPUT_POST, 'event_date');
+        $notes = filter_input(INPUT_POST, 'notes');
 
         if ($eventName && $trackName && $eventDate) {
-            $queryAdd = 'INSERT INTO race_events (eventName, trackName, eventDate) 
-                         VALUES (:eventName, :trackName, :eventDate)';
+            $queryAdd = 'INSERT INTO race_events (eventName, trackName, eventDate, notes) 
+                         VALUES (:eventName, :trackName, :eventDate, :notes)';
             $stmt = $db->prepare($queryAdd);
             $stmt->bindValue(':eventName', $eventName);
             $stmt->bindValue(':trackName', $trackName);
             $stmt->bindValue(':eventDate', $eventDate);
+            $stmt->bindValue(':notes', $notes);
             $stmt->execute();
             $stmt->closeCursor();
 
@@ -77,8 +79,17 @@
                 <label>Track Name:</label>
                 <input type="text" name="track_name" placeholder="e.g. Flamboro Speedway" required /><br />
 
-                <label>Event Date:</label>
-                <input type="date" name="event_date" required /><br />
+                <label for="event_date">Event Date:</label>
+                    <input 
+                    type="date" 
+                    id="event_date" 
+                    name="event_date" 
+                    required
+                    onclick="this.showPicker && this.showPicker()"
+                >
+
+                <h3>Notes</h3>
+                <textarea name="notes" rows="4" cols="50"><?php echo htmlspecialchars($setup['notes'] ?? ''); ?></textarea><br />
 
                 <label>&nbsp;</label>
                 <input type="submit" value="Add Race Event" /><br />

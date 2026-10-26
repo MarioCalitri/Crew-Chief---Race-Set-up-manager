@@ -86,10 +86,9 @@
         </div>
     </form>
 
-    <div class="formRow buttonRow">
-            <div></div>
-            <input type="submit" value="Back To Pit Logs" class="btnSubmit" />
-        </div>
+    <form action="pit_logs.php" method="get" style="display: inline;">
+                        <input type="submit" value="View Pit Logs" />
+                    </form>
 </main>
 
     <?php include("footer.php"); ?>

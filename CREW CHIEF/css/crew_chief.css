@@ -778,3 +778,270 @@ footer {
     color: #ffffff;
     white-space: nowrap; /* Keeps all four tire readings on one line */
 }
+/* Button Container */
+.buttonContainer {
+    margin: 20px 0;
+}
+
+/* Styled Button Links */
+.buttonLink {
+    display: inline-block;
+    background-color: #d32f2f;
+    color: #ffffff;
+    padding: 10px 20px;
+    margin-right: 10px;
+    border: 1px solid #444444;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+/* Hover Effect (Matches your red accent theme) */
+.buttonLink:hover {
+    background-color: #ff0000;
+    border-color: #ff1e1e;
+    color: #ffffff;
+}
+.formRow {
+    margin-bottom: 15px;
+}
+
+.formRow label {
+    display: inline-block;
+    width: 130px; /* Adjust as needed */
+    font-weight: bold;
+}
+
+.formRow input[type="text"],
+.formRow input[type="email"],
+.formRow input[type="password"] {
+    padding: 8px;
+    width: 250px;
+    background: #121212;
+    color: #fff;
+    border: 1px solid #333;
+    border-radius: 4px;
+}
+
+/* ==========================================
+   Driver Profiles Page & Tables Styling
+   ========================================== */
+
+/* Main Profiles Table Styling (matches pitLogTable style) */
+main table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: #1a1a1a;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid #333333;
+}
+
+main table th {
+    background-color: #0f0f0f;
+    color: #ff3b3b;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 14px 16px;
+    text-align: left;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #333333;
+    text-transform: uppercase;
+}
+
+main table td {
+    padding: 14px 16px;
+    vertical-align: middle;
+    border-bottom: 1px solid #282828;
+    color: #e0e0e0;
+    font-size: 0.95rem;
+}
+
+main table tr:last-child td {
+    border-bottom: none;
+}
+
+main table tr:hover td {
+    background-color: #222222;
+}
+
+/* Profile Thumbnail Images in Table */
+main table td img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid #444;
+    display: block;
+}
+
+/* Action Buttons inside Table Cells */
+main table td form {
+    display: inline-block;
+    margin: 0;
+}
+
+.btn-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e50914;
+    color: #ffffff !important;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    border: none;
+    cursor: pointer;
+    text-decoration: none !important;
+    transition: background-color 0.2s ease;
+}
+
+.btn-action:hover {
+    background-color: #ff1e1e;
+}
+
+.btn-delete {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #b30000;
+    color: #ffffff !important;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-delete:hover {
+    background-color: #e50914;
+}
+
+/* Add / Dashboard Navigation Links */
+.btn-add {
+    display: inline-block;
+    background-color: #e50914;
+    color: #ffffff !important;
+    padding: 10px 18px;
+    border-radius: 4px;
+    font-weight: bold;
+    text-decoration: none;
+    margin-top: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-add:hover {
+    background-color: #ff1e1e;
+    text-decoration: none;
+}
+
+
+/* ==========================================
+   Profile Details Card Styling (for profile_details.php)
+   ========================================== */
+.profile-page {
+    display: flex;
+    justify-content: center;
+}
+
+.profile-card {
+    background: #1f1f1f;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 30px;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-bottom: 2px solid #e50914;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.profile-photo img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 2px solid #444;
+}
+
+.profile-title h1 {
+    color: #ffffff;
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+    border: none;
+    padding: 0;
+}
+
+.driver-badge {
+    display: inline-block;
+    background-color: #e50914;
+    color: #fff;
+    padding: 2px 8px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    border-radius: 3px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.team-name {
+    color: #aaa;
+    font-size: 0.95rem;
+}
+
+.profile-details {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+.detail-row .label {
+    font-weight: bold;
+    color: #888;
+}
+
+.detail-row .value {
+    color: #fff;
+}
+
+.profile-actions {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.btn-back {
+    display: inline-block;
+    background-color: #333;
+    color: #fff !important;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: bold;
+    text-decoration: none;
+    border: 1px solid #555;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-back:hover {
+    background-color: #444;
+}

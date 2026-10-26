@@ -33,7 +33,7 @@
 
         <?php include('header.php'); ?>
 
-        <h1>Chassis Setup Sheets</h1>
+        <h1>Setup Sheets</h1>
 
         <table>
 

@@ -23,8 +23,12 @@
                     unset($_SESSION['user_error']);
                 }
             ?>
-
-            <p><a href="register_user_form.php">Back to Registration</a></p>
+            <div id="buttons">
+                <label>&nbsp;</label>
+                <form action="register_user_form.php" method="get" style="display: inline;">
+                    <input type="submit" value="Back to Registration" />
+                </form>
+            </div>
         </main>
 
         <?php include("footer.php"); ?>
